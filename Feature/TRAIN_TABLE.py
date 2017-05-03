@@ -47,7 +47,7 @@ TRAIN = TRAIN.reset_index()
 TRAIN_TRN_C =  list(map(lambda x:'SA'+ str(x).zfill(2), np.arange(TRN_N)))
 TRAIN_TST_C =  list(map(lambda x:'SB'+ str(x).zfill(2), np.arange(TST_N)))
 TRAIN.columns = ['TOLLGATE_ID','INTERSECTION_ID']  + TRAIN_TRN_C + TRAIN_TST_C  + ['TRN_STA','TRN_END','TST_STA','TST_END']
-## #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #############################################
+########################################################################################################################
 TRAIN_OK = TRAIN[TRAIN.loc[:,TRAIN_TST_C].isnull().sum(axis = 1)==0]
 # IF TRAIN CONTAIN NAN --> DEL
 TRAIN_OK = TRAIN_OK[TRAIN_OK.loc[:,TRAIN_TRN_C].isnull().sum(axis = 1)<=(TRN_N-6)]
@@ -126,7 +126,7 @@ TEST_DF.reset_index(level=0, inplace=True)
 TRAIN_TRN_C =  list(map(lambda x:'SA'+ str(x).zfill(2), np.arange(6)))
 TEST_DF.columns = ['TOLLGATE_ID','INTERSECTION_ID']  + TRAIN_TRN_C + ['TRN_STA','TRN_END']
 TEST_DF.to_csv("TEST_DF.csv",index=None,encoding='utf-8')
-###############MERGE ALL FEATURE ################################################################################################################
+###############MERGE ALL FEATURE #######################################################################################
 TEST_DF['TOLLGATE_ID'] = TEST_DF['TOLLGATE_ID'].apply(lambda x:int(x))
 TRAIN_OK['TOLLGATE_ID'] = TRAIN_OK['TOLLGATE_ID'].apply(lambda x:int(x))
 ROUTES_FEATURES = pd.read_csv('ROUTES_FEATURES.csv')
@@ -142,7 +142,7 @@ X_test = TEST_DF_ROUTES[ALL_FEATURE_LIST]
 X.to_csv('X.csv', index = False)
 Y.to_csv('Y.csv', index = False)
 X_test.to_csv('Xtest.csv', index = False)
-###############################ADD WEATHER FEATURE########################################################################################
+###############################ADD WEATHER FEATURE######################################################################
 X = pd.read_csv('X.csv')
 Y = pd.read_csv('Y.csv')
 Xtest = pd.read_csv('Xtest.csv')
