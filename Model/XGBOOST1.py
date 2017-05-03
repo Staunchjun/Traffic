@@ -29,6 +29,15 @@ for a in X.columns:
 for a in Xtest.columns:
     scaler = StandardScaler()
     Xtest[a] = scaler.fit_transform(Xtest[a])
+
+############Split Train DATA and Test Data##############################################################################
+##from sklearn import cross_validation
+##X_train_m, X_test_m,y_train_m, y_test_m = cross_validation.train_test_split(X,Y, test_size=0.008)
+############Split Train DATA and Test Data###########################ONLY USING IN TESTING##############################
+##X =  X_train_m
+##Y = y_train_m
+##Xtest = X_test_m
+########################################################################################################################
 # 一阶训练 保留90%的数据，去除脏数据
 error_list = []
 Ytrain_all = pd.DataFrame()
@@ -59,7 +68,6 @@ XGBR = xgb.XGBRegressor(max_depth = 5,learning_rate=0.01,n_estimators=1600,reg_a
 Ytest_all = pd.DataFrame()
 error_list = []
 Ytrain_all = pd.DataFrame()
-XGBR = xgb.XGBRegressor(max_depth = 3,learning_rate=0.1,n_estimators=500)
 TRAIN_TST_C = ['SB00', 'SB01', 'SB02', 'SB03', 'SB04', 'SB05']
 for ind in range(6):
     time1 = time.time()
@@ -73,6 +81,11 @@ for ind in range(6):
     Ytest_df = pd.DataFrame(Ytest)
     Ytest_all = pd.concat((Ytest_all,Ytest_df),axis = 1)
 print(np.mean(error_list))
+
+###############TESTING######OFFLINE VALIATION###########################################################################
+##y_test_m.reset_index(drop=True,inplace=True)
+##abs_MAPE_error(Ytest_all.values,y_test_m.values)
+########################################################################################################################
 
 # Gernerate Final Result
 Xtest = pd.read_csv('C:/Users/Administrator/PycharmProjects/Traffic/Feature/Xtest.csv')
